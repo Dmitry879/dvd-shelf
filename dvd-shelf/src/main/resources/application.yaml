@@ -1,0 +1,7 @@
+spring:
+  application:
+   name: dvd-shelf
+  datasource:
+   url: jdbc:mysql://localhost:3306/dvd_shelf?createDatabaseIfNotExist=true
+   username: root
+   password: root
