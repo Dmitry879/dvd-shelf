@@ -4,7 +4,7 @@ CREATE TABLE `dvd_shelf`.`genres` (
   PRIMARY KEY (`id`));
   
 CREATE TABLE `dvd_shelf`.`dvds` (
-  `id` BIGINT NOT NULL,
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(100) NOT NULL,
   `description` TEXT NOT NULL,
   `bonus_materials` TEXT NOT NULL,

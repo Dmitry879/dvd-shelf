@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	  
+	<head>
+		<title>DVD Edit</title>
+		<th:block th:replace="~{fragments/layout :: head}"></th:block>
+	</head>
+	
+	<body class="text-white">
+	
+		<nav th:replace="~{fragments/layout :: navbar}"></nav>
+	
+		<div class="container mt-5">
+			
+			<h1 class="text-center">Edit DVD</h1>
+		
+			<form th:action="@{/dvd/{id}/edit(id=${dvdId})}" 
+			      th:object="${dvdRequest}" 
+			      method="post"
+			      enctype="multipart/form-data">
+			      
+			      <div class="row">
+			      
+				     <div class="mb-3 col">
+					    <label for="title" class="form-label">Title:</label>
+					    <input type="text" class="form-control" id="title" th:field="*{title}">
+					    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+				     </div>
+			      		      	    
+				     <div class="mb-3 col">
+				    	<label for="genreIds" class="form-label">Genre(s):</label>
+				    	<select class="form-select" id="genreIds" th:field="*{genreIds}" multiple size="5">
+				    		<option th:each="genre : ${allGenres}"
+				    				th:value="${genre.id}"
+				    				th:text="${genre.name}">
+				    		</option>
+				    	</select>
+				    	<div>Hold Ctrl (Windows) or Cmd (Mac) to select multiple genres.</div>
+				    	<div th:if="${#fields.hasErrors('genreIds')}" th:errors="*{genreIds}" class="text-danger"></div>
+				    </div>
+				    
+				    <div class="mb-3 col">
+					    <label for="runtime" class="form-label">Runtime:</label>
+					    <input type="text" class="form-control" id="runtime" th:field="*{runtime}">
+					    <div th:if="${#fields.hasErrors('runtime')}" th:errors="*{runtime}"></div>			
+					</div>
+					
+					<div class="mb-3 col">
+					    <label for="price" class="form-label">Price:</label>
+					    <input type="number" class="form-control" id="price" th:field="*{price}">
+					    <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>			
+					</div>
+			    
+			      </div>
+			      
+			      <div class="row">
+			      
+			      	<div class="mb-3 col">
+					    <label for="description" class="form-label">Description:</label>
+					    <textarea class="form-control" id="description" rows="5" th:field="*{description}"></textarea>		    
+			    	</div>
+			    	
+			    	<div class="mb-3 col">
+					    <label for="bonus" class="form-label">Bonus Materials:</label>
+					    <textarea class="form-control" id="bonus" rows="7" th:field="*{bonusMaterials}"></textarea>		    
+			    	</div>
+			      
+			      </div>
+			      
+			      <div class="mb-3 col">
+					    <label for="specs" class="form-label">Specifications:</label>
+					    <textarea class="form-control" id="specs" rows="7" th:field="*{specifications}"></textarea>	    
+			    	</div>
+			      
+			      
+			      
+				<div class="row">
+				    
+					<div class="mb-3 col">
+					    <label for="releaseDate" class="form-label">Release Date:</label>
+					    <input type="date" class="form-control" id="releaseDate" th:field="*{releaseDate}">
+					    <div th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}"></div>		
+					</div>
+					
+					<div class="mb-3 col">
+					    <label for="arrivalDate" class="form-label">Arrival Date:</label>
+					    <input type="date" class="form-control" id="arrivalDate" th:field="*{arrivalDate}">
+					    <div th:if="${#fields.hasErrors('arrivalDate')}" th:errors="*{arrivalDate}"></div>		
+					</div>
+					
+					<div class="mb-3 col">
+					    <label for="numDiscs" class="form-label">Number of Discs:</label>
+					    <input type="number" class="form-control" id="numDiscs" th:field="*{numDiscs}">
+					    <div th:if="${#fields.hasErrors('numDiscs')}" th:errors="*{numDiscs}"></div>			
+					</div>
+					
+					<div class="mb-3 col">
+					    <label for="qty" class="form-label">Quantity:</label>
+					    <input type="number" class="form-control" id="qty" th:field="*{qty}">
+					    <div th:if="${#fields.hasErrors('qty')}" th:errors="*{qty}"></div>
+				     </div>
+				
+				</div>
+			    
+			    <div class="mb-3">
+			    	<label for="image" class="form-label">DVD Cover Image (optional)</label>
+			    	<input type="file" class="form-control" id="image" name="image" accept="image/*">
+			    </div>
+			
+			    <button type="submit" class="btn btn-secondary mt-3">Save Changes</button>
+			
+			</form>
+		
+		</div>
+	
+	</body>
+	
+</html>

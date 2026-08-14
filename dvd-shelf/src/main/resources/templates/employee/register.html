@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	  
+	<head>
+		<title>Employee Registration</title>
+		<th:block th:replace="~{fragments/layout :: head}"></th:block>
+	</head>
+	
+	<body class="text-white">
+	
+		<nav th:replace="~{fragments/layout :: navbar}"></nav>
+	
+		<div class="container mt-5">
+			
+			<h1 class="text-center">Create Employee Account</h1>
+		
+			<form th:action="@{/employee/register}" 
+			      th:object="${employeeRequest}" 
+			      method="post">
+			      
+			      <div class="row">
+			      
+				     <div class="mb-3 col">
+					    <label for="username" class="form-label">Username:</label>
+					    <input type="text" class="form-control" id="username" th:field="*{username}">
+					    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+				     </div>
+			      		      
+				  	<div class="mb-3 col">
+					    <label for="password" class="form-label">Password:</label>
+					    <input type="password" class="form-control" id="password" th:field="*{password}">
+					    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+				  	</div>
+				  	
+				    <div class="mb-3 col">
+					    <label for="confirmPassword" class="form-label">Confirm Password:</label>
+					    <input type="password" class="form-control" id="confirmPassword" th:field="*{confirmPassword}">
+					    <div th:if="${#fields.hasErrors('confirmPassword')}"
+					    	 th:errors="*{confirmPassword}">
+					    </div>		    
+				    </div>
+			    
+			      </div>
+			      
+				<div class="row">
+				
+					<div class="mb-3 col">
+					    <label for="firstName" class="form-label">First Name:</label>
+					    <input type="text" class="form-control" id="firstName" th:field="*{firstName}">
+					    <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>			
+					</div>
+				    
+					<div class="mb-3 col">
+					    <label for="lastName" class="form-label">Last Name:</label>
+					    <input type="text" class="form-control" id="lastName" th:field="*{lastName}">
+					    <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>			
+					</div>
+				    
+					<div class="mb-3 col">
+					    <label for="dateOfBirth" class="form-label">Date of Birth:</label>
+					    <input type="date" class="form-control" id="dateOfBirth" th:field="*{dob}">
+					    <div th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}"></div>		
+					</div>
+				
+				</div>
+			    
+			    <div class="row">
+			    
+				    <div class="mb-3 col">
+					    <label for="phone" class="form-label">Phone:</label>
+					    <input type="text" class="form-control" id="phone" th:field="*{phone}">
+					    <div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>	    
+				    </div>
+				    
+					<div class="mb-3 col">
+					    <label for="email" class="form-label">Email:</label>
+					    <input type="email" class="form-control" id="email" th:field="*{email}">
+					    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>			
+					</div>
+					
+			    </div>
+			    
+			    <div class="mb-3">
+				    <label for="address" class="form-label">Address:</label>
+				    <textarea class="form-control" id="address" rows="2" th:field="*{address}"></textarea>		    
+			    </div>
+			    
+			
+			    <button type="submit" class="btn btn-secondary mt-3">Register</button>
+			
+			</form>
+		
+		</div>
+	
+	</body>
+	
+</html>

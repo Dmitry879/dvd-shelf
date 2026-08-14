@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	  
+	<head>
+		<title>DVD Details</title>
+		<th:block th:replace="~{fragments/layout :: head}"></th:block>
+	</head>
+	
+	<body class="text-white">
+	
+		<nav th:replace="~{fragments/layout :: navbar}"></nav>
+	
+		<div class="container mt-5">
+		
+			<h1 class="text-center mb-4" th:text="${dvd.title}">DVD Title</h1>
+			
+			<div class="row">
+			
+				<div class="col-md-3">
+					<img th:if="${dvd.imagePath != null}"
+					th:src="@{${dvd.imagePath}}"
+					class="img-fluid rounded"
+					alt="DVD Cover">
+					<img th:unless="${dvd.imagePath != null}"
+						 th:src="@{/images/fefault-dvd.png}"
+						 class="img-fluid rounded"
+						 alt="No cover available">
+				</div>
+				
+				<div class="col-md-9">
+				
+					<p><strong>Description:</strong> <span th:text="${dvd.description}"></span></p>
+					
+					<p><strong>Genres:</strong>
+						<span th:each="genre, iterStat : ${dvd.genres}">
+							<span th:text="${genre.name}"></span><span th:if="${!iterStat.last}">,</span>
+						</span>
+					</p>
+					
+					<div class="row">
+						<div class="col-md-6">
+							<p><strong>Runtime:</strong> <span th:text="${dvd.runtime}"></span></p>
+							<p><strong>Number of Discs:</strong> <span th:text="${dvd.numDiscs}"></span></p>
+							<p><strong>Price:</strong> <span th:text="${'$' + dvd.price}"></span></p>
+						</div>
+						
+						<div class="col-md-6">
+							<p><strong>Release Date:</strong> <span th:text="${#temporals.format(dvd.releaseDate, 'MM-dd-yyyy')}"></span></p>
+							<p><strong>Arrival Date:</strong> <span th:text="${#temporals.format(dvd.arrivalDate, 'MM-dd-yyyy')}"></span></p>
+							<p><strong>Quantity:</strong> <span th:text="${dvd.inventory?.quantity}"></span></p>
+						</div>
+					</div>
+					
+					<p><strong>Bonus Materials:</strong> <span th:text="${dvd.bonusMaterials}"></span></p>
+					<p><strong>Specifications:</strong> <span th:text="${dvd.specifications}"></span></p>
+				
+				</div>
+			
+			</div>
+			
+			<div class="mt-4">
+				<a class="btn btn-warning btn-sm" th:href="@{/dvd/{id}/edit(id=${dvd.id})}">Edit</a>
+				<a class="btn btn-secondary btn-sm" th:href="@{/dvd}">Back to List</a>
+			</div>
+		
+		</div>
+	
+	</body>
+	
+</html>

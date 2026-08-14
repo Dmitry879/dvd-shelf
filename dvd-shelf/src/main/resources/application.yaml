@@ -4,4 +4,8 @@ spring:
   datasource:
    url: jdbc:mysql://localhost:3306/dvd_shelf?createDatabaseIfNotExist=true
    username: root
-   password: root
+   password: "@Development789"
+  
+logging:
+  level:
+    com.gcu.dvdshelf: DEBUG

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+	<head>
+	
+		<th:block th:fragment="head">
+	    	<meta charset="UTF-8">
+	    	<title th:text="${pageTitle} ?: 'Dev Jobs'">DVD Shelf</title>
+        	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        	<link rel="stylesheet" th:href=@{/css/layout.css}>
+        	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+        	
+        	
+        	
+	    </th:block>
+		
+	</head>
+
+	<body>
+		
+		<nav th:fragment="navbar" class="navbar navbar-dark navbar-expand-lg navbar-glass fixed-top">
+		  <div class="container-fluid">
+		  
+		    <a class="navbar-brand" href="#">DS</a>
+		    
+		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+		    		data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+		    		aria-expanded="false" aria-label="Toggle navigation">
+		      <span class="navbar-toggler-icon"></span>
+		      
+		    </button>
+		    
+		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    
+		      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+		      
+		        <li class="nav-item">
+		          <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+		        </li>
+		        
+		        <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')">
+		          <a class="nav-link text-white" th:href="@{/dvd}">Manage DVDs</a>
+		        </li>
+		        
+		        <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')">
+		          <a class="nav-link text-white" th:href="@{/inventory}">Inventory</a>
+		        </li>
+		        
+		        <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+		          <a class="nav-link text-white" th:href="@{/employee}">Manage Employees</a>
+		        </li>
+		        
+		        <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+		          <a class="nav-link text-white" th:href="@{/employee/register}">Register Employee</a>
+		        </li>
+		        
+		      </ul>
+		      
+		      
+		      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+		        
+		        <li class="nav-item" sec:authorize="isAnonymous()">
+		          <a class="nav-link text-white" th:href="@{/login}">Login</a>
+		        </li>
+		        
+		        <li class="nav-item" sec:authorize="isAuthenticated()">
+		        	<span class="nav-link text-white">
+		        		Welcome, <span sec:authentication="name"></span>!
+		        	</span>
+		        </li>
+		        
+		        <li class="nav-item" sec:authorize="isAuthenticated()">
+		        
+		        	<form th:action="@{/logout}" method="post">
+		        	
+		        		<button type="submit"
+		        				class="nav-link text-white">
+		        			Logout
+		        		</button>
+		        	
+		        	</form>
+		        
+		        </li>
+		      
+		      </ul>
+		      
+		    </div>
+		  </div>
+		</nav>
+			
+		<script th:fragment="scripts" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+		
+	</body>
+
+</html>

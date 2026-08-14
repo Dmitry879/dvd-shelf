@@ -1,0 +1,28 @@
+       	
+body {
+	padding-top: 5rem;
+	padding-bottom: 5rem;
+	
+    background-image:
+    	linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    	url('/img/dvd-background-image.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+ }
+    
+h1 {
+	margin-bottom: 3rem;
+}
+    
+.navbar-glass {
+       background: rgba(255, 255, 255, 0.15);
+       backdrop-filter: blur(10px);
+       -webkit-backdrop-filter: blur(10px);
+       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+   }
+   
+.navbar-nav .nav-link {
+    font-size: 1.25rem;
+}

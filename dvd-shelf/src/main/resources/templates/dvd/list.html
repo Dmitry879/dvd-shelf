@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+	    <meta charset="UTF-8">
+	    <title>DVDs</title>
+	    <th:block th:replace="~{fragments/layout :: head}"></th:block>
+	</head>
+	
+	<body class="text-white">
+	
+		<nav th:replace="~{fragments/layout :: navbar}"></nav>
+		
+		<div class="container mt-5">
+		
+			<h1 class="text-center">DVDs</h1>
+			
+			<div sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')">
+				<a th:href="@{/dvd/register}" class="btn btn-secondary">Input New DVD</a>
+			</div>
+			
+			<hr>
+			
+			<div class="text-center" th:if="${#lists.isEmpty(dvds)}">
+				<p>There are no DVDs to display.</p>
+			</div>
+			
+			<table class="table table-striped" th:if="${!#lists.isEmpty(dvds)}">
+			
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">DVD Title</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="dvd, dvdNum : ${dvds}">
+						<td th:text="${dvdNum.count}">1</td>
+						<td th:text="${dvd.title}">DVD Title</td>
+						<td>
+							<a class="btn btn-secondary btn-sm"
+							   th:href="@{/dvd/{id}(id=${dvd.id})}">View</a>
+							<a class="btn btn-warning btn-sm"
+							   th:href="@{/dvd/{id}/edit(id=${dvd.id})}">Edit</a>
+							   
+							<form th:action="@{/dvd/{id}/delete(id=${dvd.id})}"
+								  method="post"
+								  onsubmit="return confirm('Are you sure you want to delete this DVD?');"
+								  style="display: inline;">
+								<button type="submit" class="btn btn-danger btn-sm">Delete</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			
+			</table>
+		
+		</div>
+	
+	</body>
+	   
+</html>
